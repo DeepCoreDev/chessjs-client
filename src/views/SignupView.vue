@@ -75,7 +75,7 @@ export default {
 
 <template>
     <section>
-        <div class="flex flex-col items-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-6">
+        <div class="flex flex-col items-center px-6 py-8 mx-auto md:h-screen lg:py-0 pt-6">
             <div href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <img class="w-auto h-8 mr-2" :src="`/${$store.state.color}/chessjs.png`" alt="ChessJS logo">
             </div>
