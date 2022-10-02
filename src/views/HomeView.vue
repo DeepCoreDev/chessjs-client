@@ -29,9 +29,9 @@
                         </router-link>
                     </div>
                     <div v-if="$store.state.userData">
-                        <router-link :to="{ name: 'user' }"
+                        <router-link :to="{ name: 'play' }"
                             class="mb-3 inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                            Profile
+                            Play
                             <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"

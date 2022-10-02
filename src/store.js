@@ -5,7 +5,8 @@ var $store = new Vuex.Store({
     state: {
         color: 'light',
         apiPrefix: '',
-        userData: null
+        userData: null,
+        deepcoreServer: "deepcore.dev"
     },
     getters: {},
     mutations: {

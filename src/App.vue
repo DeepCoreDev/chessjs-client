@@ -90,10 +90,12 @@ export default {
                 Signup</router-link>
             </li>
           </ul>
-          <router-link type="button" v-if="$store.state.userData" to="/user"
+          <a type="button" v-if="$store.state.userData"
+            :href="`//${$store.state.deepcoreServer}/user/${$store.state.userData.username}`" target="_blank"
             class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-            <img class="object-cover w-8 h-8 rounded-full" :src="$store.state.userData.pfp" alt="user photo">
-          </router-link>
+            <img class="object-cover w-8 h-8 rounded-full"
+              :src="`//${$store.state.deepcoreServer}${$store.state.userData.picture}`" alt="user photo">
+          </a>
 
         </div>
       </div>
@@ -131,12 +133,14 @@ export default {
                   </router-link>
                 </li>
                 <li v-if="$store.state.userData">
-                  <router-link type="button" v-if="$store.state.userData" to="/user"
+                  <a type="button" v-if="$store.state.userData"
+                    :href="`//${$store.state.deepcoreServer}/user/${$store.state.userData.username}`" target="_blank"
                     class="ml-2 flex items-center flex mr-3 text-sm dark:bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
-                    <img class="object-cover w-8 h-8 rounded-full" :src="$store.state.userData.pfp" alt="user photo">
+                    <img class="object-cover w-8 h-8 rounded-full"
+                      :src="`//${$store.state.deepcoreServer}${$store.state.userData.picture}`" alt="user photo">
                     <span
                       class="p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">Profile</span>
-                  </router-link>
+                  </a>
                 </li>
               </ul>
             </div>

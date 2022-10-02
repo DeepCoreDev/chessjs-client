@@ -63,8 +63,8 @@ export default {
                 for(let i = start; i < this.variants.length; i++){
                     axios.get(this.$store.state.apiPrefix + `/api/user/fetch?id=${this.variants[i].author}`).then((m) => {
                         this.variants[i].user = {
-                            name: m.data.display_name,
-                            picture: m.data.pfp
+                            name: m.data.displayName,
+                            picture: m.data.picture
                         }
                     }).catch((m) => {
                         this.variants[i].user = {
@@ -72,17 +72,9 @@ export default {
                             picture: null
                         }
                     });
-                    
-                    if(this.$store.state.userData && this.$store.state.userData.liked.includes(this.variants[i]._id)){
-                        this.variants[i].liked = true;
-                    }else{
-                        this.variants[i].liked = false;
-                    }
-                    if(this.$store.state.userData && this.$store.state.userData.saved.includes(this.variants[i]._id)){
-                        this.variants[i].saved = true;
-                    }else{
-                        this.variants[i].saved = false;
-                    }
+
+                    this.variants[i].liked = this.$store.state.userData?.appData?.liked?.includes(this.variants[i]._id);
+                    this.variants[i].saved = this.$store.state.userData?.appData?.saved?.includes(this.variants[i]._id);
                 }
             })
         }
@@ -116,7 +108,7 @@ export default {
                         `The variant author has not provided a description. Please check back later.`}}</p>
                         <div class="flex justify-between items-center">
                             <router-link class="flex items-center space-x-4" :to="`/user/${variant.author}`">
-                                <img class="w-7 h-7 rounded-full" :src="variant.user?.picture || '/notfound.png'"
+                                <img class="w-7 h-7 rounded-full" :src="`//${$store.state.deepcoreServer}${variant.user?.picture}` || '/notfound.png'"
                                     alt="?" />
                                 <span class="font-medium dark:text-white">
                                     {{variant.user?.name || variant.author}}

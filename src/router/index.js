@@ -13,6 +13,11 @@ const router = createRouter({
       }
     },
     {
+      path: '/callback',
+      name: 'callback',
+      component: () => import('../views/CallbackView.vue')
+    },
+    {
       path: '/privacy',
       name: 'privacy',
       component: () => import('../views/PrivacyPolicy.vue'),
@@ -47,7 +52,7 @@ const router = createRouter({
     {
       path: '/signup',
       name: 'signup',
-      component: () => import('../views/SignupView.vue'),
+      component: () => import('../views/LoginView.vue'),
       meta: {
         title: "Signup"
       }
@@ -161,7 +166,9 @@ const router = createRouter({
     },
     {
       path: '/user/:username',
-      component: () => import('../views/UserView.vue')
+      beforeEnter(to, from, next){
+        window.location.href = `//${store.state.deepcoreServer}${to.fullPath}`;
+      }
     },
     {
       path: '/:pathMatch(.*)*',

@@ -59,16 +59,15 @@ export default {
                 display_name: this.editing.displayName,
                 description: this.editing.description
             }).then((e) => {
-
+                this.userData.display_name = this.editing.displayName;
+                this.userData.description = this.editing.description;
             });
         },
         setDisplayName(e) {
             this.editing.displayName = e.target.innerText;
-            this.userData.display_name = this.editing.displayName;
         },
         setDescription(e) {
             this.editing.description = e.target.innerText;
-            this.userData.description = this.editing.description;
         },
         showProfilePictureEditModal(e) {
             if (!this.currentUser) {

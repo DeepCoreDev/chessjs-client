@@ -82,8 +82,8 @@ export default {
             for(let i = 0; i < this.meta.players.length; i++){
                 let e = await axios.get(this.$store.state.apiPrefix + `/api/user/fetch?id=${this.meta.players[i]}`);
                 temp.push({
-                    name: e.data.display_name,
-                    picture: e.data.pfp
+                    name: e.data.displayName || e.data.username,
+                    picture: e.data.picture
                 });
             }
             this.players = temp;
@@ -109,7 +109,7 @@ export default {
             <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">About Game</h2>
             <p class="mb-5 font-light text-gray-500 dark:text-gray-400">Players logged in:</p>
             <div class="flex items-center space-x-4 mb-4" v-for="player in players">
-                <img class="w-7 h-7 rounded-full" :src="player.picture || '/notfound.png'" alt="?" />
+                <img class="w-7 h-7 rounded-full" :src="`//${$store.state.deepcoreServer}${player.picture}`" alt="?" />
                     <span class="font-medium dark:text-white">
                         {{player.name}}
                     </span>
@@ -130,10 +130,10 @@ export default {
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-4">
                         <img class="w-7 h-7 rounded-full"
-                            :src="variant.user?.pfp || '/notfound.png'"
+                            :src="`//${$store.state.deepcoreServer}${variant.user.picture}`"
                             alt="?" />
                         <span class="font-medium dark:text-white">
-                            {{variant.user?.display_name || variant.author}}
+                            {{variant.user?.displayName || variant.author}}
                         </span>
                     </div>
                     <a :href="`/variant/${variant._id}`" target="_blank"

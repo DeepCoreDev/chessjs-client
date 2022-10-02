@@ -8,7 +8,7 @@ export default {
     methods: {
         // For now the only gamemode
         playOnline(e){
-            axios.post(this.$store.state.apiPrefix + `/api/chess/new?variant_id=632026e2be87f97ef47794db`).then((e) => {
+            axios.post(this.$store.state.apiPrefix + `/api/chess/new?variant_id=63396697f0a4c253b8b9096a`).then((e) => {
                 this.$router.push(`/play/${e.data.play_id}`);
             })
         }

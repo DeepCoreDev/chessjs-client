@@ -3,7 +3,7 @@ import axios from 'axios';
 import NotFound from './NotFound.vue';
 export default {
     props: ['preview'],
-    data(){
+    data() {
         return {
             notFound: false,
             variant: null,
@@ -18,20 +18,20 @@ export default {
             }
         }
     },
-    created(){
+    created() {
         axios.get(this.$store.state.apiPrefix + `/api/variant/fetch?id=${this.$route.params.variant_id}`).then((e) => {
             this.variant = e.data;
             document.title = this.variant.title + " | ChessJS";
-            if(this.preview){
+            if (this.preview) {
                 this.loading = false;
-            }else{
-                if(this.variant.author == this.$store.state.userData?.username){
+            } else {
+                if (this.variant.author == this.$store.state.userData?.username) {
                     this.owns = true;
                     axios.get(this.$store.state.apiPrefix + `/api/editor/fetch?id=${this.variant._id}`).then((d) => {
                         this.editorObj = d.data;
                         this.loading = false;
                     })
-                }else{
+                } else {
                     this.loading = false;
                 }
             }
@@ -41,12 +41,12 @@ export default {
         });
     },
     watch: {
-        $route (to, from) {
+        $route(to, from) {
             document.title = this.variant.title + " | ChessJS";
         }
     },
     methods: {
-        report(e){
+        report(e) {
             axios.post(this.$store.state.apiPrefix + `/api/editor/report`, {
                 id: this.variant._id,
                 title: this.state.title,
@@ -55,7 +55,7 @@ export default {
                 this.state.submitted = true;
             })
         }
-    }, 
+    },
     components: {
         NotFound
     }
@@ -189,7 +189,8 @@ export default {
                 </aside>
             </Transition>
             <div class="float-right grow">
-                <button data-collapse-toggle="navbar-search" type="button" @click="state.showSideBar = !state.showSideBar"
+                <button data-collapse-toggle="navbar-search" type="button"
+                    @click="state.showSideBar = !state.showSideBar"
                     class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                     aria-controls="navbar-search" aria-expanded="false">
                     <span class="sr-only">Open menu</span>
@@ -267,38 +268,41 @@ export default {
                 </div>
             </div>
         </section>
-        <section class="bg-white dark:bg-gray-900">
-            <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
-                    Report An Issue with {{variant.title}}</h2>
-                <p class="font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Found an issue (like a
-                    bug) with how the variant works? Got a suggestion for the developer? Enter your details here, and
-                    they will recieve a message the next time they log in.</p>
-                <p class="mb-8 lg:mb-16 font-light text-center text-red-500 dark:text-red-400">Note: This sends a
-                    message to the developer. To send ChessJS a message, raise a ticket <a
-                        href="https://tickets.chess-js.com/" class="underline" target="_blank">here</a></p>
+        <transition name="slide-fade">
+            <section class="bg-white dark:bg-gray-900" v-if="!state.submitted">
+                <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">
+                        Report An Issue with {{variant.title}}</h2>
+                    <p class="font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Found an issue (like a
+                        bug) with how the variant works? Got a suggestion for the developer? Enter your details here,
+                        and
+                        they will recieve a message the next time they log in.</p>
+                    <p class="mb-8 lg:mb-16 font-light text-center text-red-500 dark:text-red-400">Note: This sends a
+                        message to the developer. To send ChessJS a message, raise a ticket <a
+                            href="https://tickets.chess-js.com/" class="underline" target="_blank">here</a></p>
 
-                <div class="space-y-8">
-                    <div>
-                        <label for="subject"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
-                        <input type="text" id="subject" v-model="state.title"
-                            class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                            placeholder="What is the issue about?" required>
+                    <div class="space-y-8">
+                        <div>
+                            <label for="subject"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
+                            <input type="text" id="subject" v-model="state.title"
+                                class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                                placeholder="What is the issue about?" required>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="message"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Message</label>
+                            <textarea id="message" rows="6" v-model="state.description"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Leave a comment..."></textarea>
+                        </div>
+                        <button @click="report"
+                            class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Report
+                            Issue!</button>
                     </div>
-                    <div class="sm:col-span-2">
-                        <label for="message"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Message</label>
-                        <textarea id="message" rows="6" v-model="state.description"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Leave a comment..."></textarea>
-                    </div>
-                    <button @click="report"
-                        class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        :disabled="state.submitted">{{state.submitted ? "Thank you!" : "Report Issue"}}</button>
                 </div>
-            </div>
-        </section>
+            </section>
+        </transition>
     </div>
     <NotFound v-else></NotFound>
 </template>
