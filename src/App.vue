@@ -181,11 +181,14 @@ export default {
           <router-link :to="{ name: 'pricing' }" class="mr-4 hover:underline md:mr-6">Pricing</router-link>
         </li>
         <li>
+          <a href="https://deepcore.dev/contact" target="_blank" class="mr-4 hover:underline md:mr-6">Contact</a>
+        </li>
+        <li>
           <router-link :to="{ name: 'privacy' }" class="mr-4 hover:underline md:mr-6">Privacy Policy</router-link>
         </li>
       </ul>
       <span class="text-sm text-gray-500 inline-flex sm:text-center dark:text-gray-400">© 2022 DeepCore. All Rights
-        Reserved. ChessJS v0.4.0
+        Reserved. ChessJS v0.5.1
       </span>
     </div>
   </footer>

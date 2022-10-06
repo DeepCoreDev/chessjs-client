@@ -29,13 +29,13 @@
                     address, phone number, the contents of the message and/or attachments you may send us, and any other
                     information you may choose to provide.</p>
                 <p>When you register for an Account, we may ask for your contact information, including items such as
-                    name, company name, address, email address, and telephone number.</p>
+                    name, email address, and telephone number.</p>
 
                 <h2 class="text-gray-900 dark:text-white">How we use your information</h2>
 
                 <p>We use the information we collect in various ways, including to:</p>
 
-                <ul class="list-disc">
+                <ul class="list-disc ml-6">
                     <li>Provide, operate, and maintain our website</li>
                     <li>Improve, personalize, and expand our website</li>
                     <li>Understand and analyze how you use our website</li>
