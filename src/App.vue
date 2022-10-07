@@ -75,13 +75,14 @@ export default {
             <li v-for="link in navLinks">
               <router-link :to="{ name: link.path }" custom v-slot="{ navigate }">
                 <button
-                  class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                :class="$route.name == link.path ? 'underline decoration-primary-100 underline-offset-8 decoration-4 text-slate-900 dark:text-white' : ''"
+                  class="block py-2 pr-4 pl-3 text-gray-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   @click="navigate" @keypress.enter="navigate" role="link">{{ link.name }}</button>
               </router-link>
             </li>
             <li v-if="!$store.state.userData">
               <router-link :to="{ name: 'login' }"
-                class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+                class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium ring-2 ring-primary-400 rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
                 Login</router-link>
             </li>
             <li v-if="!$store.state.userData">
@@ -113,7 +114,8 @@ export default {
                 </li>
                 <li v-for="link in navLinks">
                   <router-link :to="{ name: link.path }"
-                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                  :class="$route.name == link.path ? 'bg-gray-100 dark:bg-gray-700' : ''"
+                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white">
                     <span class="ml-3">{{ link.name }}</span>
                   </router-link>
                 </li>
