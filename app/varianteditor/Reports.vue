@@ -2,22 +2,22 @@
 import axios from 'axios';
 export default {
     props: ['variant', 'editorObj'],
-    data(){
+    data() {
         return {
             reports: [],
             loading: true
         }
     },
-    async created(){
-        for(let i = 0; i < this.editorObj.reports.length; i++){
+    async created() {
+        for (let i = 0; i < this.editorObj.reports.length; i++) {
             let report = this.editorObj.reports[i];
             try {
                 var author = await axios.get(this.$store.state.apiPrefix + `/api/user/fetch?id=${report.author}`);
                 report.user = {
-                    name: author.data.display_name,
-                    picture: author.data.pfp
+                    name: author.data.displayName,
+                    picture: author.data.picture
                 }
-            }catch(e){
+            } catch (e) {
                 report.user = {
                     name: report.author,
                     picture: "/notfound.png"
@@ -29,7 +29,7 @@ export default {
         this.loading = false;
     },
     methods: {
-        resolve(index){
+        resolve(index) {
             console.log(index);
         }
     }
@@ -59,24 +59,28 @@ export default {
                     </svg>
                     <span class="sr-only">Loading...</span>
                 </div>
-                <p v-else-if="reports.length == 0" class="font-light text-center text-gray-400 dark:text-gray-800">No reports left!</p>
+                <p v-else-if="reports.length == 0" class="font-light text-center text-gray-400 dark:text-gray-800">No
+                    reports left!</p>
                 <article v-else v-for="report,i in reports"
                     class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{report.title}}</h2>
+                    <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{report.title}}
+                    </h2>
                     <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{report.description}}</p>
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-4">
-                            <img class="w-7 h-7 rounded-full"
-                                :src="report.user.picture"
-                                alt="Jese Leos avatar" />
+                            <img class="w-7 h-7 rounded-full" :src="`https://deepcore.dev${report.user.picture}`"
+                                alt="" />
                             <span class="font-medium dark:text-white">
                                 {{report.user.name}}
                             </span>
                         </div>
-                        <button @click="() => resolve(i)"
-                            class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
-                            Resolve
-                        </button>
+                        <div>
+                            <button type="button"
+                                class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Block</button>
+                            <button type="button" @click="() => resolve(i)"
+                                class="text-white bg-primary-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Resolve</button>
+                        </div>
+
                     </div>
                 </article>
             </div>

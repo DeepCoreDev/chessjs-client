@@ -1,25 +1,29 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from "../store.js";
 
+import Home from "../views/HomeView.vue";
+import Callback from '../views/CallbackView.vue';
+import PrivacyPolicy from '../views/PrivacyPolicy.vue';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: () => import("../views/HomeView.vue"),
+      component: Home,
       meta: {
         title: "Home"
       }
     },
     {
       path: '/callback',
-      component: () => import('../views/CallbackView.vue')
+      component: Callback
     },
     {
       path: '/privacy',
       name: 'privacy',
-      component: () => import('../views/PrivacyPolicy.vue'),
+      component: PrivacyPolicy,
       meta: {
         title: "Privacy"
       }

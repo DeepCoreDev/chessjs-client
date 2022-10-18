@@ -75,7 +75,7 @@ export default {
             <li v-for="link in navLinks">
               <router-link :to="{ name: link.path }" custom v-slot="{ navigate }">
                 <button
-                :class="$route.name == link.path ? 'underline decoration-primary-100 underline-offset-8 decoration-4 text-slate-900 dark:text-white' : ''"
+                :class="$route.name == link.path ? 'underline decoration-primary-100 underline-offset-8 decoration-2 text-slate-900 dark:text-white' : ''"
                   class="block py-2 pr-4 pl-3 text-gray-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   @click="navigate" @keypress.enter="navigate" role="link">{{ link.name }}</button>
               </router-link>
@@ -190,7 +190,7 @@ export default {
         </li>
       </ul>
       <span class="text-sm text-gray-500 inline-flex sm:text-center dark:text-gray-400">© 2022 DeepCore. All Rights
-        Reserved. ChessJS v0.5.1
+        Reserved. ChessJS v0.5.2
       </span>
     </div>
   </footer>
